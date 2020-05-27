@@ -14,7 +14,7 @@ module.exports = function (app) {
         fs.readFile('../db/db.json', 'utf8', function (error, data) {
             const db = JSON.parse(data);
 
-            var newNote = {
+            const newNote = {
                 id: uuid(),
                 ...req.body
             };
@@ -30,8 +30,17 @@ module.exports = function (app) {
 
     app.delete('/api/notes/:id', function (req, res) {
         fs.readFile('./db/db.json', 'utf8', function (error, data) {
+            //parse all data from the json file
+            const db = JSON.parse(data);
+            //
+            if(!db[i].id === req.body.id) {
+                db.splice(db[i], 1)
+            }
 
-
+            fs.writeFile('../db/db.json', JSON.stringify(db),function (error) {
+                if(error) throw error;
+                res.json(db)
+            })
         });
     });
 }
