@@ -1,7 +1,5 @@
 const express = require('express');
-const path = require('path');
-const fs = require('fs');
-const db = require('db.json');
+const { v4: uuid } = require('uuid/v4');
 
 const PORT = process.env.PORT || 3000;
 
@@ -10,30 +8,19 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("public"));
 
-var notes = fs.readFile('./db/db.json', "utf8", function (error, data) {
-    if (err) {
-        throw err
-    }
-});
+require('./routes/api')(app);
+require('./routes/html')(app);
 
-app.get("/", function (req, res) {
-    res.sendFile(path.join(__dirname, "index.html"))
-});
-
-app.get("/api/notes", function (req, res) {
-    res.sendFile(path.join(__dirname, "notes.html"));
-    res.json(notes);
-});
-
-app.post("/api/notes", function (req, res) {
-    newNote = req.body;
-    notes.push(newNote);
-});
-
-// app.delete("/api/notes/:id", function (req, res) {
-//     //remove notes from the json
-// });
+// const store = new Store();
 
 app.listen(PORT, function () {
     console.log(`App is listening on PORT ${PORT}`);
 });
+
+// app.get('/', async(req, res) => {
+//     res.json(await store.getAllNotes())
+// });
+
+// app.post('/', async (req, res) => {
+//     res.json(await store.addNote(req.body))
+// });
