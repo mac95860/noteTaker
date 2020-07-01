@@ -6,7 +6,7 @@
 // const readFileAsync = promisify(readFile);
 // const writeFileAsync = promisify(writeFile);
 
-// const DB_FILE = './db.json';
+// const DB_FILE = './db.json'; 4
 // const DB_FILE_PATH = join(__dirname, DB_FILE);
 
 // class Store {

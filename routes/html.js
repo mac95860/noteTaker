@@ -1,5 +1,8 @@
-const db = require("./db/db");
+const db = require("../db/db.json");
 const path = require('path');
+const express = require('express');
+
+var app = express();
 
 
 module.exports = function(app) {
@@ -9,7 +12,7 @@ module.exports = function(app) {
     });
 
     app.get('/notes', function (req, res) {
-        res.sendFile(path.join()(__dirname, "notes.html"))
+        res.sendFile(path.join(__dirname, "../public/notes.html"))
     });
 }
  

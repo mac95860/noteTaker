@@ -1,5 +1,6 @@
 const express = require('express');
-const { v4: uuid } = require('uuid/v4');
+const { v4: uuidv4 } = require('uuid');
+
 
 const PORT = process.env.PORT || 3000;
 
@@ -11,16 +12,7 @@ app.use(express.static("public"));
 require('./routes/api')(app);
 require('./routes/html')(app);
 
-// const store = new Store();
-
 app.listen(PORT, function () {
     console.log(`App is listening on PORT ${PORT}`);
 });
 
-// app.get('/', async(req, res) => {
-//     res.json(await store.getAllNotes())
-// });
-
-// app.post('/', async (req, res) => {
-//     res.json(await store.addNote(req.body))
-// });
