@@ -33,12 +33,13 @@ module.exports = function (app) {
         fs.readFile('./db/db.json', 'utf8', function (error, data) {
             
             const db = JSON.parse(data);
-            
-            db.filter((note) => note.id !== id);
+            console.log(db);
+            const deletedNote = db.filter((note) => note.id !== req.params.id);
           
-            fs.writeFile('../db/db.json', JSON.stringify(db), function (error) {
+            fs.writeFile('./db/db.json', JSON.stringify(deletedNote), function (error) {
                 if(error) throw error;
-                res.json(db);
+                
+                res.json(deletedNote);
             })
         })
     });
